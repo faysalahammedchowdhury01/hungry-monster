@@ -37,24 +37,27 @@ const loadMealById = async (idMeal) => {
   return data.meals[0];
 };
 
-// get ingredient
-const getIngredient = (meal) => {
-  const ingredients = [];
+// get materials
+const getMaterials = (meal) => {
+  const materials = [];
 
   for (let i = 1; i <= 20; i++) {
-    const ingredient = `${meal['strIngredient' + i]}`;
-    if (ingredient == '') {
+    const measure = meal['strMeasure' + i];
+    const ingredient = meal['strIngredient' + i];
+    const material = `${measure} ${ingredient}`;
+
+    if (!measure || !ingredient) {
       continue;
     }
-    ingredients.push(ingredient);
+    materials.push(material);
   }
 
-  return ingredients;
+  return materials;
 };
 
 // display selected meal
 const displaySelectedMeal = (meal) => {
-  const ingredients = getIngredient(meal);
+  const materials = getMaterials(meal);
   const { strMealThumb, strMeal } = meal;
   selectedMealContainer.innerHTML = `
     <div class="col-md-8 col-lg-6">
@@ -64,10 +67,10 @@ const displaySelectedMeal = (meal) => {
                 <h4 class="text-center text-dark-purple fw-bold pb-2">${strMeal}</h4>
                 <h5 class="fw-bold py-3 border-top">Meal Ingredients</h5>
                 <ul class="ps-0">
-                    ${ingredients
-                      .map((ingredient) => {
+                    ${materials
+                      .map((material) => {
                         return `
-                        <li class="list-unstyled my-2">✔ ${ingredient}</li>
+                        <li class="list-unstyled my-2">✔ ${material}</li>
                         `;
                       })
                       .join('')}
