@@ -1,0 +1,29 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8dd74;
+}
+
+.text-dark-purple {
+  color: #3b2d64 !important;
+}
+
+.bg-dark-purple {
+  background-color: #3b2d64 !important;
+}
+
+.nav-item {
+  font-weight: 700;
+  margin: 0 20px;
+}
+
+.nav-item:first-child {
+  margin-left: 0;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+.card {
+  cursor: pointer;
+}
