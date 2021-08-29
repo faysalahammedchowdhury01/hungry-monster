@@ -81,10 +81,11 @@ const displaySelectedMeal = (meal) => {
 };
 
 // clicked meal
-const clickedMeal = (idMeal) => {
+const clickedMeal = async (idMeal) => {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  loadMealById(idMeal).then((meal) => displaySelectedMeal(meal));
+  const meal = await loadMealById(idMeal);
+  displaySelectedMeal(meal);
 };
 
 // display meals
@@ -116,7 +117,7 @@ const displayMeals = (meals) => {
 };
 
 // handle search
-const handleSearch = (event) => {
+const handleSearch = async (event) => {
   event.preventDefault();
   selectedMealContainer.innerHTML = '';
   const searchValue = searchMealInput.value;
@@ -125,7 +126,8 @@ const handleSearch = (event) => {
     return;
   }
 
-  loadMeals(searchValue).then((meals) => displayMeals(meals || []));
+  const meals = await loadMeals(searchValue);
+  displayMeals(meals || []);
   searchMealInput.value = '';
 };
 
